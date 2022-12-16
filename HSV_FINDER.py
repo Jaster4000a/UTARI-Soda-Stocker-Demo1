@@ -7,18 +7,18 @@ import numpy as np
 import cv2
 # define a numpy.ndarray for the color
 # here insert the bgr values which you want to convert to hsv
-green = np.uint8([[[237, 158, 174]]])
+color = np.uint8([[[57,88,99]]])
 
 # convert the color to HSV
-hsvGreen = cv2.cvtColor(green, cv2.COLOR_BGR2HSV)
+hsvColor = cv2.cvtColor(color, cv2.COLOR_BGR2HSV)
 
 # display the color values
-print("BGR of Green:", green)
-print("HSV of Green:", hsvGreen)
+print("BGR of color:", color)
+print("HSV of color:", hsvColor)
 
 # Compute the lower and upper limits
-lowerLimit = hsvGreen[0][0][0] - 10, 100, 100
-upperLimit = hsvGreen[0][0][0] + 10, 255, 255
+lowerLimit = hsvColor[0][0][0] - 10, 100, 100
+upperLimit = hsvColor[0][0][0] + 10, 255, 255
 
 # display the lower and upper limits
 print("Lower Limit:",lowerLimit)
