@@ -22,25 +22,26 @@ def callback(data):
 	if not data == msg_closed:
 		msg = data
 
-rospy.init_node('blinking')
+if __name__ == '__main__':
+	rospy.init_node('blinking')
 
-_images = ''#'/home/scem/ros_ws/baxter_eyes'
+	_images = ''#'/home/scem/ros_ws/baxter_eyes'
 
-img = cv2.imread(_images + 'straight.jpg')
-sub = rospy.Subscriber('/robot/xdisplay', Image, callback)
+	img = cv2.imread(_images + 'straight.jpg')
+	sub = rospy.Subscriber('/robot/xdisplay', Image, callback)
 
-bridge = CvBridge()
-img_closed = cv2.imread('closed.jpg')
-msg_closed = bridge.cv2_to_imgmsg(img_closed)#np.array(img_closed)
-msg = bridge.cv2_to_imgmsg(img)
+	bridge = CvBridge()
+	img_closed = cv2.imread('closed.jpg')
+	msg_closed = bridge.cv2_to_imgmsg(img_closed)#np.array(img_closed)
+	msg = bridge.cv2_to_imgmsg(img)
 
-pub = rospy.Publisher('/robot/xdisplay', Image,latch=True, queue_size=10)
+	pub = rospy.Publisher('/robot/xdisplay', Image,latch=True, queue_size=10)
 
-while not rospy.is_shutdown():
-	
-	timer = random.randint(2,4)	
+	while not rospy.is_shutdown():
+		
+		timer = random.randint(2,4)	
 
-	time.sleep(timer)
-	print("blinking")
-	pub.publish(msg_closed)
-	pub.publish(msg)
+		time.sleep(timer)
+		print("blinking")
+		pub.publish(msg_closed)
+		pub.publish(msg)
